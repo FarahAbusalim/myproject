@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from .models import Advertisement
 from .serializers import AdvertisementSerializer
@@ -7,6 +7,10 @@ from .serializers import AdvertisementSerializer
 class AdvertisementViewSet(viewsets.ModelViewSet):
     queryset = Advertisement.objects.all()  # جلب جميع الإعلانات
     serializer_class = AdvertisementSerializer  # الـ Serializer للإعلانات
+    # ✅ دعم الترتيب حسب created_at
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['created_at']
+    ordering = ['-created_at']  # ← الترتيب الافتراضي: الأحدث أولًا
 
     # تحديد الصلاحيات
     def get_permissions(self):
