@@ -5,8 +5,7 @@ from .views import QuestionViewSet, AnswerViewSet
 
 
 router = DefaultRouter()
-router.register(r'questions', QuestionViewSet)
-router.register(r'answers', AnswerViewSet)
+router.register(r'questions', QuestionViewSet) #بيوفر الend points تلقائيا للسؤال 
 
 urlpatterns = [
     path('', include(router.urls)),
